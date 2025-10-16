@@ -1,0 +1,2 @@
+# S-DCVROOD
+Software, experiments and results of the paper [DCV-ROOD EVALUATION FRAMEWORK: DUAL CROSS-VALIDATION FOR ROBUST OUT-OF-DISTRIBUTION DETECTION](https://arxiv.org/abs/2509.05778)
