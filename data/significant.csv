@@ -1,0 +1,6 @@
+Metric,p ≤ 0.1,p ≤ 0.05,p ≤ 0.01
+auroc pval≤0.05,CV 3 (mds),-,-
+aupr pval≤0.05,CV 3 (mds),-,-
+F1 score pval≤0.05,-,-,-
+TPR5 pval≤0.05,"CV 3 (mds), CV 6 (mds)",CV 3 (mds),-
+acc 90 pval≤0.05,-,-,-

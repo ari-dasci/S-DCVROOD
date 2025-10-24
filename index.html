@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DCV-ROOD Stats Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/css/app.css">
+</head>
+
+<body>
+    <div class="layout" id="app">
+        <aside class="sidebar">
+            <div class="brand"><i class="fa-solid fa-microscope"></i><strong>DCV-ROOD Stats</strong></div>
+            <nav class="nav">
+                <!-- GRUPO 0: principal -->
+                <div class="nav-section">Main</div>
+                <a href="#" class="link" data-section="home" aria-current="page"><i class="fa-solid fa-house"></i> <span class="label">Home</span></a>
+                <a href="#" class="link" data-section="datasets"><i class="fa-solid fa-database"></i> <span class="label">Datasets</span></a>
+                <a href="#" class="link" data-section="algorithms"><i class="fa-solid fa-gears"></i> <span class="label">Algorithms</span></a>
+                <a href="#" class="link" data-section="metrics"><i class="fa-solid fa-chart-column"></i> <span class="label">Metrics</span></a>
+
+            
+                <!-- GRUPO 1: vista por tipo de tabla -->
+                <div class="nav-section">By-Experiment View</div>
+                <a href="#" class="link" data-section="bt"><i class="fa-solid fa-chart-line"></i> <span class="label">Benchmark
+                    Truth</span></a>
+                <a href="#" class="link" data-section="wilcoxon"><i class="fa-solid fa-flask"></i> <span class="label">Wilcoxon p-values</span></a>
+                <a href="#" class="link" data-section="hr"><i class="fa-solid fa-bullseye"></i> <span class="label">Hit rate</span></a>
+            
+                <!-- GRUPO 2: vista por métrica -->
+                <div class="nav-section">By-Metric View</div>
+                <a href="#" class="link" data-section="metric" data-metric="auroc"><i class="fa-solid fa-sliders"></i> <span class="label">AUROC</span></a>
+                <a href="#" class="link" data-section="metric" data-metric="aupr"><i class="fa-solid fa-sliders"></i> <span class="label">AUPR</span></a>
+                <a href="#" class="link" data-section="metric" data-metric="tprfpr"><i class="fa-solid fa-sliders"></i> <span class="label">TPR5</span></a>
+                <a href="#" class="link" data-section="metric" data-metric="acc90"><i class="fa-solid fa-sliders"></i> <span class="label">Acc-90</span></a>
+            
+                <!-- GRUPO 3: resultados globales -->
+                <div class="nav-section">Overall Results</div>
+                <a href="#" class="link" data-section="summary"><i class="fa-solid fa-list-check"></i> <span class="label">Results summary</span></a>
+                <a href="#" class="link" data-section="significant"><i class="fa-solid fa-scale-balanced"></i> <span class="label">Significant
+                    differences</span></a>
+            </nav>
+
+        </aside>
+
+        <main class="content">
+            <header class="topbar">
+                <button id="sidebar-toggle" class="btn" aria-label="Toggle sidebar" aria-expanded="true" style="margin-right:.5rem">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="breadcrumbs">
+                    <i id="crumb-icon" class="fa-solid fa-house"></i>
+                    <span id="crumb">Home</span>
+                    <span class="version">v1.0</span>
+                </div>
+
+                <div class="toplinks">
+                    <a id="btn-source" href="https://github.com/ari-dasci/S-DCVROOD" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source code</a>
+                    <!--<a href="#"><i class="fa-regular fa-file-lines"></i> Docs</a>-->
+                    <!--<a href="#"><i class="fa-brands fa-python"></i> PyPI</a>-->
+                    <!--<a href="#"><i class="fa-solid fa-download"></i> Downloads</a>-->
+                    <!-- Downloads (dropdown) -->
+                    <div class="dropdown" id="downloads">
+                        <button class="dropdown-toggle">
+                            <i class="fa-solid fa-download"></i> Downloads
+                            <i class="fa-solid fa-caret-down" style="margin-left:.35rem;opacity:.8"></i>
+                        </button>
+                        <div class="dropdown-menu" role="menu" aria-hidden="true">
+                            <button class="dropdown-item" data-dl="scripts"><i class="fa-solid fa-file-zipper"></i> Download
+                                scripts</button>
+                            <button class="dropdown-item" data-dl="tables"><i class="fa-solid fa-table"></i> Download tables</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="container">
+                <!-- BT -->
+                <article class="card hidden" id="view-bt">
+                    <div class="card-header">
+                        <div data-partial></div>
+
+                        <div class="chipbar">
+                            <button class="chip" data-group="metric" data-value="auroc" data-active="true">AUROC</button>
+                            <button class="chip" data-group="metric" data-value="aupr">AUPR</button>
+                            <button class="chip" data-group="metric" data-value="f1">F1 Score</button>
+                            <button class="chip" data-group="metric" data-value="tprfpr">TPR5</button>
+                            <button class="chip" data-group="metric" data-value="acc90">Acc-90</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="notice hidden" data-status></div>
+                        <div class="table-wrap" aria-live="polite">
+                            <table data-table></table>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- HR -->
+                <article class="card hidden" id="view-hr">
+                    <div class="card-header">
+                        <div data-partial></div>
+
+                        <div class="chipbar">
+                            <!-- Métricas -->
+                            <div class="row">
+                                <strong class="muted">Metric</strong>
+                                <button class="chip" data-group="metric" data-value="auroc" data-active="true">AUROC</button>
+                                <button class="chip" data-group="metric" data-value="aupr">AUPR</button>
+                                <button class="chip" data-group="metric" data-value="f1">F1 Score</button>
+                                <button class="chip" data-group="metric" data-value="tprfpr">TPR5</button>
+                                <button class="chip" data-group="metric" data-value="acc90">Acc-90</button>
+                            </div>
+                            <!-- p-valores -->
+                            <div class="row">
+                                <strong class="muted">p-value</strong>
+                                <button class="chip" data-group="pvalue" data-value="0.1">0.1</button>
+                                <button class="chip" data-group="pvalue" data-value="0.05" data-active="true">0.05</button>
+                                <button class="chip" data-group="pvalue" data-value="0.01">0.01</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="notice hidden" data-status></div>
+                        <div class="table-wrap" aria-live="polite">
+                            <table data-table></table>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Wilcoxon -->
+                <article class="card hidden" id="view-wilcoxon">
+                    <div class="card-header">
+                        <div data-partial></div>
+
+                        <div class="chipbar">
+                            <button class="chip" data-group="metric" data-value="auroc" data-active="true">AUROC</button>
+                            <button class="chip" data-group="metric" data-value="aupr">AUPR</button>
+                            <button class="chip" data-group="metric" data-value="f1">F1 Score</button>
+                            <button class="chip" data-group="metric" data-value="tprfpr">TPR5</button>
+                            <button class="chip" data-group="metric" data-value="acc90">Acc-90</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="notice hidden" data-status></div>
+                        <div class="table-wrap" aria-live="polite">
+                            <table data-table></table>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Summary -->
+                <article class="card hidden" id="view-summary">
+                    <div class="card-header">
+                        <div data-partial></div>
+
+                        <div class="chipbar">
+                            <button class="chip" data-group="pvalue" data-value="0.1">0.1</button>
+                            <button class="chip" data-group="pvalue" data-value="0.05" data-active="true">0.05</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="notice hidden" data-status></div>
+                        <div class="table-wrap" aria-live="polite">
+                            <table data-table></table>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Significant -->
+                <article class="card hidden" id="view-significant">
+                    <div class="card-header">
+                        <div data-partial></div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="notice hidden" data-status></div>
+                        <div class="table-wrap" aria-live="polite">
+                            <table data-table></table>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Home y Datasets (placeholders) -->
+                <article class="card" id="view-home">
+                    <div class="card-body">
+                        <div data-partial></div>
+
+                    </div>
+                </article>
+                <article class="card hidden" id="view-datasets">
+                    <div class="card-body">
+                        <div data-partial></div>
+
+                        <div class="notice hidden" data-status></div>
+                        <div class="table-wrap" aria-live="polite" style="margin-top:.75rem">
+                            <table data-table="datasets"></table>
+                        </div>
+
+
+                    </div>
+                </article>
+
+                <article class="card hidden" id="view-algorithms">
+                    <div class="card-header">
+                        <div data-partial></div>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </article>
+                
+                <article class="card hidden" id="view-metrics">
+                    <div class="card-header">
+                        <div data-partial></div>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </article>
+
+
+                <!-- Vista por métrica (única vista, controlada por state.metric) -->
+                <article class="card hidden" id="view-metric">
+                    <div class="card-header">
+                        <div data-partial></div>
+
+                
+                        <div class="chipbar">
+                            <!-- Chips de tipo de tabla -->
+                            <div class="row">
+                                <strong class="muted">Table</strong>
+                                <button class="chip" data-group="section" data-value="bt" data-active="true">Benchmark Truth</button>
+                                <button class="chip" data-group="section" data-value="wilcoxon">Wilcoxon p-values</button>
+                                <button class="chip" data-group="section" data-value="hr">Hit rate</button>
+                            </div>
+                
+                            <!-- Chips de p-valor (solo visibles si section === 'hr') -->
+                            <div class="row hidden" data-role="pvalue-group" style="margin-top:.35rem">
+                                <strong class="muted">p-value</strong>
+                                <button class="chip" data-group="pvalue" data-value="0.1">0.1</button>
+                                <button class="chip" data-group="pvalue" data-value="0.05" data-active="true">0.05</button>
+                                <button class="chip" data-group="pvalue" data-value="0.01">0.01</button>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="card-body">
+                        <div class="notice hidden" data-status></div>
+                        <div class="table-wrap" aria-live="polite">
+                            <table data-table></table>
+                        </div>
+                    </div>
+                </article>
+
+
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="./assets/js/modules/main.js"></script>
+</body>
+
+</html>

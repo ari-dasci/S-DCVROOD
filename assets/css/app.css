@@ -1,0 +1,472 @@
+:root {
+    --bg: #0f172a;
+    --bg-soft: #111827;
+    --text: #e5e7eb;
+    --text-dim: #9ca3af;
+    --accent: #2563eb;
+    --accent-700: #1d4ed8;
+    --chip: #1f2937;
+    --surface: #0b1022;
+    --card: #ffffff;
+    --muted: #6b7280;
+    --table-stripe: #f8fafc;
+    --max-bold: #111827;
+    --glass-border: rgba(148, 163, 184, .45)
+}
+
+body {
+    margin: 0;
+    font-family: Inter, system-ui;
+    background: var(--surface);
+    color: #111827
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh
+}
+
+.sidebar {
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .06)
+}
+
+.brand i {
+    color: var(--accent)
+}
+
+.nav {
+    padding: .5rem .5rem 1.5rem;
+    flex: 1;
+    overflow: auto
+}
+
+.nav-section {
+    color: var(--text-dim);
+    font-size: .75rem;
+    text-transform: uppercase;
+    padding: .75rem 1rem .35rem
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    color: var(--text);
+    text-decoration: none;
+    padding: .65rem 1rem;
+    border-radius: .5rem
+}
+
+/* Hover normal */
+.link:hover {
+    background: var(--bg-soft);
+}
+
+/* Link activo destacado */
+.link[aria-current="page"],
+.link[aria-current="page"]:hover {
+    background: linear-gradient(90deg, var(--accent), var(--accent-700));
+    color: #fff;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, .12);
+}
+
+/* Icono del link activo en blanco */
+.link[aria-current="page"] i {
+    color: #fff;
+}
+
+.link i {
+    width: 18px;
+    text-align: center;
+    color: var(--text-dim)
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .75rem 1.25rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(248, 250, 252, .8));
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    backdrop-filter: saturate(140%) blur(8px);
+    box-shadow: 0 8px 18px rgba(2, 6, 23, .06)
+}
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: #111827;
+    font-weight: 600
+}
+
+.breadcrumbs .version {
+    font-size: .72rem;
+    color: #334155;
+    background: #e2e8f0;
+    padding: .15rem .45rem;
+    border-radius: .4rem;
+    border: 1px solid #cbd5e1
+}
+
+.toplinks {
+    display: flex;
+    gap: .5rem
+}
+
+.toplinks a {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    color: #0f172a;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    padding: .45rem .7rem;
+    border-radius: 999px;
+    font-size: .875rem;
+    font-weight: 600
+}
+
+.toplinks a i {
+    opacity: .85
+}
+
+.content {
+    display: flex;
+    flex-direction: column
+}
+
+.container {
+    padding: 1.25rem
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid #e5e7eb;
+    border-radius: 14px
+}
+
+.card-header {
+    padding: 1rem;
+    border-bottom: 1px solid #eef2f7
+}
+
+.card-body {
+    padding: 1rem
+}
+
+.muted {
+    color: var(--muted)
+}
+
+.chipbar {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    padding-top: .5rem
+}
+
+.chip {
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #1e293b;
+    padding: .35rem .6rem;
+    border-radius: .5rem;
+    font-weight: 600;
+    font-size: .875rem;
+    cursor: pointer
+}
+
+.chip[data-active="true"] {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent)
+}
+
+.toolbar {
+    display: flex;
+    gap: .5rem;
+    margin-top: .5rem
+}
+
+.btn {
+    border: 1px solid #cbd5e1;
+    background: #e2e8f0;
+    color: #0f172a;
+    padding: .45rem .75rem;
+    border-radius: .5rem;
+    font-weight: 600;
+    cursor: pointer
+}
+
+.btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff
+}
+
+.table-wrap {
+    width: 100%;
+    overflow: auto;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb
+}
+
+table {
+    border-collapse: separate;
+    width: 100%
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    background: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+    padding: .6rem .75rem;
+    text-align: left
+}
+
+tbody td {
+    padding: .55rem .75rem;
+    border-bottom: 1px solid #f1f5f9
+}
+
+tbody tr:nth-child(odd) {
+    background: var(--table-stripe)
+}
+
+td.max {
+    font-weight: 800;
+    color: var(--max-bold)
+}
+
+.hidden {
+    display: none !important
+}
+
+.notice {
+    padding: .75rem;
+    border: 1px solid #e5e7eb;
+    background: #f8fafc;
+    border-radius: .5rem
+}
+
+.row {
+    display: flex;
+    gap: .5rem;
+    align-items: center
+}
+
+.spinner {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    border: 3px solid #cbd5e1;
+    border-top-color: var(--accent);
+    animation: spin .8s linear infinite
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+/* Negrita por significación (wilcoxon y hr) */
+td.sig {
+    font-weight: 800;
+    color: var(--max-bold);
+}
+
+/* Columnas destacadas: mismo fondo que las filas/zebra y en negrita */
+tbody td.keycol {
+    background: var(--table-stripe) !important;
+    /* mismo color que las filas claras */
+    font-weight: 700;
+    color: var(--max-bold);
+}
+
+/* Párrafo descriptivo principal (entre h1 y muted) */
+.lead {
+    font-size: 1.05rem;
+    /* ligeramente más grande que el body */
+    line-height: 1.6;
+    /* lectura cómoda para párrafos largos */
+    color: #334155;
+    /* más oscuro que .muted */
+    font-weight: 500;
+    /* presencia sin parecer subtítulo */
+    margin: .35rem 0 .75rem;
+    /* respiración con h1 y el muted */
+    max-width: 75ch;
+    /* legibilidad en líneas largas */
+}
+
+/* Opcional: separador visual sutil bajo el h1 */
+.card-header h1 {
+    margin-bottom: .25rem;
+}
+
+/* === Sidebar collapse === */
+:root {
+    --sidebar-w: 280px;
+    --sidebar-w-collapsed: 84px;
+    /* ancho compacto */
+}
+
+.layout {
+    grid-template-columns: var(--sidebar-w) 1fr;
+    transition: grid-template-columns .2s ease;
+}
+
+body.sidebar-collapsed .layout {
+    grid-template-columns: var(--sidebar-w-collapsed) 1fr;
+}
+
+.sidebar {
+    transition: width .2s ease;
+    overflow: hidden;
+    /* oculta lo que no quepa */
+}
+
+/* Brand: oculta el texto en colapsado, deja el icono */
+.brand strong {
+    transition: opacity .15s ease, transform .15s ease;
+}
+
+body.sidebar-collapsed .brand strong {
+    opacity: 0;
+    transform: translateX(-6px);
+    pointer-events: none;
+}
+
+/* Secciones: ocultar los títulos de grupo en colapsado */
+.nav-section {
+    transition: opacity .15s ease, height .15s ease, margin .15s ease;
+}
+
+body.sidebar-collapsed .nav-section {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0 !important;
+    pointer-events: none;
+}
+
+/* Enlaces del sidebar: fila normal, columna en colapsado */
+.link {
+    gap: .5rem;
+    transition: padding .2s ease, gap .2s ease;
+}
+
+.link .label {
+    white-space: nowrap;
+    transition: font-size .2s ease, opacity .15s ease, transform .15s ease;
+}
+
+/* Modo colapsado: icono arriba, texto pequeño debajo */
+body.sidebar-collapsed .link {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: .55rem .35rem;
+    gap: .25rem;
+}
+
+body.sidebar-collapsed .link i {
+    font-size: 1.05rem;
+    /* icono un pelín más grande */
+}
+
+/* Texto pequeño bajo el icono */
+body.sidebar-collapsed .link .label {
+    font-size: .65rem;
+    opacity: .9;
+    transform: translateY(-1px);
+}
+
+/* Estado activo en colapsado: mantenemos contraste */
+body.sidebar-collapsed .link[aria-current="page"],
+body.sidebar-collapsed .link[aria-current="page"]:hover {
+    background: linear-gradient(90deg, var(--accent), var(--accent-700));
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .12);
+}
+
+body.sidebar-collapsed .link[aria-current="page"] i {
+    color: #fff;
+}
+
+/* === Downloads dropdown === */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    color: #0f172a;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    padding: .45rem .7rem;
+    border-radius: 999px;
+    font-size: .875rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    min-width: 220px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: .6rem;
+    box-shadow: 0 10px 24px rgba(2, 6, 23, .12);
+    padding: .35rem;
+    display: none;
+    z-index: 50;
+}
+
+.dropdown.open .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    padding: .55rem .65rem;
+    border-radius: .45rem;
+    font-weight: 600;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background: #f8fafc;
+}

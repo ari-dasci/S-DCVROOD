@@ -1,0 +1,11 @@
+<h1><i class="fa-solid fa-chart-column"></i> Metrics</h1>
+<p class="lead"> In this section you can find information about the Metrics used in the experiments.</p>
+<ul class="lead">
+    <li><strong>AUROC</strong>: AUROC provides a threshold-independent measure of a detector’s ability to rank OOD samples above ID samples. It can be interpreted as the probability that a randomly chosen OOD sample receives a higher anomaly score than a randomly chosen ID sample. A perfect detector achieves an AUROC of 100%, while an uninformative one scores 50%.</li>
+    <li><strong>AUPR</strong>: AUPR focuses on the precision-recall trade-off, which is particularly informative in imbalanced settings where OOD samples are rare. It summarizes the detector’s performance across varying thresholds, emphasizing its ability to maintain high precision while achieving high recall.</li>
+    <li><strong>F1-Score</strong>: The F1-Score is a metric that combines two key measures, precision and recall, by summarizing them into a single value using the harmonic mean.</li>
+    <li><strong>TPRN</strong>: TPRN, conversely, quantifies the proportion of OOD samples correctly detected when the false positive rate is fixed at N%. This metric highlights how well a detector performs under a controlled level of false alarms. We report TPR5, corresponding to a false positive rate fixed at 5%</li>
+    <li><strong>Accuracy</strong>: Accuracy represents the overall correctness of OOD vs. ID classification based on a fixed threshold, typically chosen using a validation set. While it is threshold-dependent, it offers an intuitive sense of the detector’s classification reliability. In our experiments, we report accuracy at thresholds corresponding to 90%.</li>
+   
+</ul>
+<p class="muted">Refer to this section to align metric definitions when reading the results in the different tables.</p>

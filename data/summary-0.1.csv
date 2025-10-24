@@ -1,0 +1,6 @@
+Metric,Hit rate,Error rate
+auroc pval≤0.1,8.913,1.6
+aupr pval≤0.1,8.8636,0.5
+F1 score pval≤0.1,8.95,1.5
+TPR5 pval≤0.1,9.8571,1.0
+acc 90 pval≤0.1 ,8.6087,1.6

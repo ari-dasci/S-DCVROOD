@@ -1,0 +1,7 @@
+Dataset,Number of Samples,Image sizes,Number of classes
+CIFAR-10,60000,32x32,10
+CIFAR-100,60000,32x32,100
+Tiny ImageNet,120000,64x64,200
+DTD,5640, varying,47
+MNIST,70000,28x28,10
+EMNIST-Letters,160100,28x28,26
