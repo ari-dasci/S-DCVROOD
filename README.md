@@ -39,7 +39,7 @@ Reading:
 
 ## Full experiments and results
 
-If you are interested in reviewing the complete results of the experiments conducted in the paper, you can access them through this [link]().
+If you are interested in reviewing the complete results of the experiments conducted in the paper, you can access them through this [link](https://ari-dasci.github.io/S-DCVROOD/).
 
 
 
